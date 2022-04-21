@@ -1,0 +1,16 @@
+{
+  "name": "simple-web-server-example",
+  "version": "1.0.0",
+  "description": "Simple Web Server Example",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node ./src/index.js"
+  },
+  "keywords": [],
+  "author": {
+    "email": "fred.lackey@gmail.com",
+    "name": "Fred Lackey",
+    "url": "http://fredlackey.com"
+  },
+  "license": "ISC"
+}

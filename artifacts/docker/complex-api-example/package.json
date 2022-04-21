@@ -1,0 +1,37 @@
+{
+  "name": "complex-api-example",
+  "version": "0.0.0",
+  "description": "Complex API Example",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node ./src/index.js",
+    
+    "simple:a": "NODE_PORT=3001 NODE_ALIAS=A node ./src/index.js",
+    "simple:b": "NODE_PORT=3002 NODE_ALIAS=B node ./src/index.js",
+    "simple": "UPSTREAM_A=localhost:3001 UPSTREAM_B=localhost:3002 node ./src/index.js",
+
+    "complex:a:a": "NODE_PORT=3011 NODE_BASE=mybase NODE_ALIAS=AA node ./src/index.js",
+    "complex:a:b": "NODE_PORT=3012 NODE_BASE=mybase NODE_ALIAS=AB node ./src/index.js",
+    "complex:a": "NODE_PORT=3010 NODE_BASE=mybase NODE_ALIAS=A UPSTREAM_AA=localhost:3011 UPSTREAM_AB=localhost:3012  node ./src/index.js",
+
+    "complex:b:a": "NODE_PORT=3021 NODE_BASE=mybase NODE_ALIAS=BA node ./src/index.js",
+    "complex:b:b": "NODE_PORT=3022 NODE_BASE=mybase NODE_ALIAS=BB node ./src/index.js",
+    "complex:b": "NODE_PORT=3020 NODE_BASE=mybase NODE_ALIAS=B UPSTREAM_AA=localhost:3021 UPSTREAM_AB=localhost:3022  node ./src/index.js",
+
+    "complex": "NODE_PORT=3030 NODE_BASE=mybase UPSTREAM_A=localhost:3010/mybase/status UPSTREAM_B=localhost:3020/mybase/status  node ./src/index.js"
+
+  },
+  "keywords": [],
+  "author": {
+    "email": "fred.lackey@gmail.com",
+    "name": "Fred Lackey",
+    "url": "http://fredlackey.com"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "cleaner-node": "^0.17.11",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "node-fetch": "^2.6.7"
+  }
+}

@@ -21,28 +21,40 @@ const doGet = async (url) => {
   }
 };
 
-const fetchUpstream = async () => {
-  // console.log('in fetchUpstream');
+const pingUpstream = async () => {
   const results = {};
   const keys = Object.keys(process.env).filter(x => (x && x.startsWith(PREFIX)));
   if (keys.length === 0) {
-    // console.log('Upstream ... none.');
     return null;
   }
-  // console.log(`keys: ${keys.length} (${keys.join(', ')})`);
-  // return;
   for (let i = 0; i < keys.length; i += 1) {
     const key = keys[i];
     let uri = process.env[key];
     if (uri && !uri.startsWith('http')) {
       uri = `http://${uri}`
     }
-    // console.log(`FETCHING ${key} : ${uri}`);
+    results[key.substring(PREFIX.length)] = await doGet(uri) || 'FAIL'
+  } 
+  return results;
+}
+const testUpstream = async () => {
+  const results = {};
+  const keys = Object.keys(process.env).filter(x => (x && x.startsWith(PREFIX)));
+  if (keys.length === 0) {
+    return null;
+  }
+  for (let i = 0; i < keys.length; i += 1) {
+    const key = keys[i];
+    let uri = process.env[key];
+    if (uri && !uri.startsWith('http')) {
+      uri = `http://${uri}/test`
+    }
     results[key.substring(PREFIX.length)] = await doGet(uri) || 'FAIL'
   } 
   return results;
 }
 
 module.exports = {
-  fetchUpstream
+  pingUpstream,
+  testUpstream
 };
